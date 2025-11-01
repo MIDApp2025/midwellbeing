@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "69909308350",
+    "project_id": "midapp-21db4",
+    "storage_bucket": "midapp-21db4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69909308350:android:e0094e7c9b2f1f414fcfef",
+        "android_client_info": {
+          "package_name": "com.midconsulting.wellbeingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb44LKgDKushe9s7QO9dVQU9x3r-NBHxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
