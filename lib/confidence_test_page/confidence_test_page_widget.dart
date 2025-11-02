@@ -76,7 +76,9 @@ class _ConfidenceTestPageWidgetState extends State<ConfidenceTestPageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+    ? FlutterFlowTheme.of(context).secondaryBackground
+    : const Color(0xFFFFFFFF),
         appBar: AppBar(
           backgroundColor: Color(0x0094B5D8),
           automaticallyImplyLeading: false,
