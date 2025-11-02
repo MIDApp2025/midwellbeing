@@ -404,25 +404,29 @@ if (_model.apiResultProg != null) {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 10.0),
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.9,
-                              height: 440.0,
-                              child: custom_widgets.MyCalendar(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 440.0,
-                                markedDates: _model.markedDatesForCalendar,
-                                markedYmdDates: _model.calenderDates,
-                                entryType: 'mood',
-                                onDaySelected: (selectedDay) async {
-                                  _model.apiResult3on =
-                                      await GetMoodDatesCalenderCall.call(
-                                    userId: currentUserUid,
-                                    entryType: 'mood',
-                                    startDate: selectedDay,
-                                    endDate: selectedDay,
-                                  );
+  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+  child: AnimatedContainer(
+    duration: Duration(milliseconds: 300),
+    curve: Curves.easeInOut,
+    width: MediaQuery.sizeOf(context).width * 0.9,
+    height: 440.0,
+    child: custom_widgets.MyCalendar(
+  width: MediaQuery.sizeOf(context).width * 0.9,
+  height: 440.0,
+  markedDates: _model.markedDatesForCalendar,
+  markedYmdDates: _model.calenderDates,
+  entryType: 'mood',
+  onSizeChanged: (newHeight) {
+    safeSetState(() {}); // Flutter Flown oma setState, ei riko mitään
+  },
+      onDaySelected: (selectedDay) async {
+        _model.apiResult3on =
+            await GetMoodDatesCalenderCall.call(
+          userId: currentUserUid,
+          entryType: 'mood',
+          startDate: selectedDay,
+          endDate: selectedDay,
+        );
 
                                   if ((_model.apiResult3on?.succeeded ??
                                       true)) {

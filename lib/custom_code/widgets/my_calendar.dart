@@ -25,6 +25,7 @@ class MyCalendar extends StatefulWidget {
   final List<String>? markedYmdDates;
   final void Function(String)? onDaySelected;
   final String? entryType;
+  final Function(double)? onSizeChanged; // 👈 tämä uusi lisäys
 
   const MyCalendar({
     Key? key,
@@ -34,6 +35,7 @@ class MyCalendar extends StatefulWidget {
     this.markedYmdDates,
     this.onDaySelected,
     this.entryType,
+    this.onSizeChanged, // 👈 ja tämä lisäys
   }) : super(key: key);
 
   @override
@@ -119,13 +121,25 @@ class _MyCalendarState extends State<MyCalendar> {
                   widget.onDaySelected?.call(_keyOf(selectedDay));
                 }
               },
-              onFormatChanged: (format) =>
-                  setState(() => _calendarFormat = format),
-              eventLoader: (day) {
-                if (_dtList.any((d) => isSameDay(d, day))) return ['marked'];
-                if (_stringDateSet.contains(_keyOf(day))) return ['marked'];
-                return [];
-              },
+              onFormatChanged: (format) {
+  setState(() {
+    _calendarFormat = format;
+
+    // 🔹 Ilmoita ulospäin, että kalenterin korkeus muuttui
+    if (widget.onSizeChanged != null) {
+      final newHeight =
+          format == CalendarFormat.month ? 440.0 : 220.0;
+      widget.onSizeChanged!(newHeight);
+    }
+  });
+},
+availableGestures: AvailableGestures.none,
+eventLoader: (day) {
+  if (_dtList.any((d) => isSameDay(d, day))) return ['marked'];
+  if (_stringDateSet.contains(_keyOf(day))) return ['marked'];
+  return [];
+},
+
               headerStyle: const HeaderStyle(
                 formatButtonVisible: true,
                 titleCentered: true,
